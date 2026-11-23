@@ -1,0 +1,21 @@
+# Obsidian local settings and cache
+vault/main/.obsidian/workspace*.json
+vault/main/.obsidian/cache
+
+# Attachments can be large. Keep them out of git if you prefer.
+vault/main/05-attachments/*
+!vault/main/05-attachments/.gitkeep
+
+# Generated graph files (rebuild with Graphify)
+vault/graphify-out/graph.json
+vault/graphify-out/graph.html
+
+# Python and OS files
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# Local secrets
+.env
+*.secret
