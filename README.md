@@ -144,6 +144,16 @@ The script assumes a simple JSON layout (`nodes` with `id` and `label`, and `lin
 
 ---
 
+## Credits
+
+VIP builds on these projects and ideas:
+
+* PARA method: [heyitsnoah/claudesidian](https://github.com/heyitsnoah/claudesidian)
+* ICM folder structure: [RinDig/Interpretable-Context-Methodology](https://github.com/RinDig/Interpretable-Context-Methodology/tree/main)
+* "One Home Per Fact" concept: Kenneth, [BrewedOps](https://brewedops.com/about/)
+
+---
+
 ## License
 
 MIT. See `LICENSE`.
