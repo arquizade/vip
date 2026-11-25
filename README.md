@@ -4,7 +4,7 @@ A three-layer repository for AI agents and humans to manage project knowledge wi
 
 VIP separates three jobs:
 
-1. **Direction (router/):** Small routing cards tell the AI agent where to look and what to do next.
+1. **Direction (root CLAUDE.md, router/):** The routing rules and small status cards tell the AI agent where to look and what to do next.
 2. **Memory (vault/main/):** An Obsidian vault holds project entry points, session logs, and atomic notes.
 3. **Connections (vault/graphify-out/):** A knowledge graph shows how notes relate, so the agent loads only the relevant neighbors.
 
@@ -63,14 +63,15 @@ Then:
 
 ```text
 vip/
+├── CLAUDE.md                     Routing rules for the agent (entry point)
+├── AGENTS.md                     Link to CLAUDE.md for other AI tools
 ├── README.md                     This file
 ├── LICENSE                       MIT license
 ├── .gitignore                    Files excluded from git
 ├── scripts/
 │   └── new-project.sh            Creates a project from the template and its card
 │
-├── router/                    Layer 1: Direction and routing
-│   ├── CLAUDE.md                 Global router instructions (keep under 500 tokens)
+├── router/                       Layer 1: Status cards, templates, and standards
 │   ├── README.md                 Guide to the router layer
 │   ├── _meta/                    Card schema and formatting rules
 │   ├── _templates/               Blank cards for new projects and clients
@@ -97,7 +98,7 @@ Each top-level folder has its own README with more detail.
 
 ---
 
-## The "One Home Per Fact" rule
+## The "Single Source of Truth" rule
 
 Every fact lives in exactly one place. Duplicates drift apart, and the agent then reads conflicting information.
 
@@ -117,7 +118,7 @@ If a fact needs a second home, link to the first home instead of copying it.
 2. It opens `router/projects/<project>-card.md` and reads the `next` field.
 3. It follows the card's `Vault folder` path and reads that folder's `README.md`.
 4. It reads the newest session log in that folder.
-5. If it needs related notes, it runs the graph walker against `graph.json`.
+5. For related notes, it reads `vault/graphify-out/GRAPH_REPORT.md` and runs the graph walker against `graph.json` if needed.
 6. It works on the task.
 7. It writes a session log and updates the card's `next` and `updated` fields.
 
@@ -148,9 +149,9 @@ The script assumes a simple JSON layout (`nodes` with `id` and `label`, and `lin
 
 VIP builds on these projects and ideas:
 
-* PARA setup: [heyitsnoah/claudesidian](https://github.com/heyitsnoah/claudesidian)
-* ICM structure: [RinDig/Interpretable-Context-Methodology](https://github.com/RinDig/Interpretable-Context-Methodology/tree/main)
-* One Home Per Fact concept: Kenneth, [BrewedOps](https://brewedops.com/about/)
+* PARA method: [heyitsnoah/claudesidian](https://github.com/heyitsnoah/claudesidian)
+* ICM folder structure: [RinDig/Interpretable-Context-Methodology](https://github.com/RinDig/Interpretable-Context-Methodology/tree/main)
+* "Single Source of Truth" concept, originally "One Home Per Fact": Kenneth, [BrewedOps](https://brewedops.com/about/)
 
 ---
 
