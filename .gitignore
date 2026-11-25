@@ -7,8 +7,9 @@ vault/main/05-attachments/*
 !vault/main/05-attachments/.gitkeep
 
 # Generated graph files (rebuild with Graphify)
-vault/graphify-out/graph.json
-vault/graphify-out/graph.html
+vault/graphify-out/*
+!vault/graphify-out/README.md
+!vault/graphify-out/.gitkeep
 
 # Python and OS files
 __pycache__/

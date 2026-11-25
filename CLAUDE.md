@@ -1,51 +1,49 @@
-# VIP Router
+# Folder Router
 
-You work inside a VIP (Vault-Index-Priority) repository. Follow these rules in every session.
+You work inside a knowledge repository. The folder names below are the ones this repository uses. If you rename a folder, update the tables in this file first. Follow these rules in every session.
 
-## Execution rules
+## Where everything lives
 
-1. Never run broad searches across `vault/main/`. Open only the files named by these rules.
-2. To learn project status, open `router/projects/<project>-card.md`. Read its `next` field and its Home table.
-3. Follow the card's `Vault folder` path. Read that folder's `README.md` first. Then read the newest session log (highest date in the filename).
-4. For questions about related notes or cross-project topics, read the Graphify report first (see the Graphify section below). Query `graph.json` only for specific links.
-5. Keep each task to about 5 files. If you need more, state why before you read further.
-6. Read `router/references/` only when the task touches a topic that has a reference file.
+| Area | Home |
+| --- | --- |
+| Project records | `router/projects/`, one card per project |
+| Client records | `router/clients/`, one card per client |
+| Reference standards | `router/references/` |
+| Card schema and rules | `router/_meta/card-schema.md` |
+| Long-term record (sessions, decisions, notes) | `vault/main/` |
+| Generated graph | `vault/graphify-out/` (do not edit) |
 
-## Graphify knowledge graph
+## Routing
 
-Before searching or grepping raw notes, read `vault/graphify-out/GRAPH_REPORT.md` when the question relates to the vault. It lists the note clusters and the most connected notes.
+| Task | Go to |
+| --- | --- |
+| Project status or next step | `router/projects/<project>-card.md`, then the project README |
+| Project history or decisions | Newest session log in `vault/main/01-projects/<project>/` |
+| Related notes across projects | `vault/graphify-out/GRAPH_REPORT.md`, then `graph.json` through `graph_walker.py` |
+| Client status | `router/clients/<client>-card.md` |
+| Standards for a topic | The matching file in `router/references/` |
+| New project | `scripts/new-project.sh <name>` |
 
-* Summary: `vault/graphify-out/GRAPH_REPORT.md`
-* Links: `vault/graphify-out/graph.json`, queried with `vault/main/.scripts/graph_walker.py <keywords> --hops 2`
-* Do not rebuild the graph. Graphify runs only when the user asks.
-* If the report is missing, say so, then use the card and project README instead.
+## Rules
 
-## One Home Per Fact
-
-* Status and next step: `router/projects/` or `router/clients/`
-* Purpose, architecture, and decisions: the project `README.md` in `vault/main/01-projects/`
-* Session history: dated logs in the same project folder
-* Relationships: `vault/graphify-out/graph.json` (generated, never edited by hand)
-
-If you find the same fact in two places, update the authoritative home and link to it from the other place. Do not copy the fact.
+1. Never search `vault/main/` broadly. Open only the files these tables name.
+2. Read the project README before any other file in its folder. Then read the newest session log.
+3. Keep each task to about 5 files. State why if you need more.
+4. Before grepping raw notes, read `vault/graphify-out/GRAPH_REPORT.md`. Query `graph.json` only for specific links. Do not rebuild the graph unless the user asks. If the report is missing, say so.
+5. Read `router/references/` only for a topic that has a file there.
 
 ## Ending a session
 
-1. Write a session log at `vault/main/01-projects/<project>/YYYY-MM-DD-session.md` using `vault/main/06-metadata/templates/session-log-template.md`.
+1. Write `vault/main/01-projects/<project>/YYYY-MM-DD-session.md` from `vault/main/06-metadata/templates/session-log-template.md`.
 2. Update the card's `next` and `updated` fields.
 3. Do not write the next step into the project README. The card holds status.
 
 ## Naming
 
-* Name every new file and folder in kebab-case: lowercase letters, digits, and single hyphens. Example: `webhook-retry-logic.md`.
-* Session logs start with the date: `YYYY-MM-DD-session.md`.
-* Project cards end with `-card.md`: `webhook-service-card.md`.
-* Keep these exceptions: `README.md` and `CLAUDE.md` keep their names. Template folders start with an underscore, such as `_template`.
-* Do not use spaces, underscores, or capital letters in new names.
+Use kebab-case for new files and folders. Session logs start with the date. Cards end with `-card.md`. Keep `README.md` and `CLAUDE.md` as they are. Template folders start with an underscore. Do not use spaces, underscores, or capitals in new names.
 
 ## Limits
 
-* Create new projects with `scripts/new-project.sh <name>`. Do not copy folders by hand.
-* Do not create a card for a project that has no `README.md` in its vault folder.
-* Do not edit files in `vault/graphify-out/`. Regenerate them with Graphify.
-* Keep this file under 500 tokens. Move long guidance to `router/references/`.
+* Create projects with `scripts/new-project.sh <name>`. Do not copy folders by hand.
+* Do not create a card for a project that has no `README.md`.
+* Do not edit files in `vault/graphify-out/` by hand.
