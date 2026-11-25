@@ -4,7 +4,7 @@ A three-layer repository for AI agents and humans to manage project knowledge wi
 
 VIP separates three jobs:
 
-1. **Direction (workspace/):** Small routing cards tell the AI agent where to look and what to do next.
+1. **Direction (router/):** Small routing cards tell the AI agent where to look and what to do next.
 2. **Memory (vault/main/):** An Obsidian vault holds project entry points, session logs, and atomic notes.
 3. **Connections (vault/graphify-out/):** A knowledge graph shows how notes relate, so the agent loads only the relevant neighbors.
 
@@ -47,11 +47,11 @@ cd vip
 scripts/new-project.sh my-first-project
 ```
 
-The script copies `vault/main/01-projects/_template/` into `vault/main/01-projects/my-first-project/` and creates `workspace/projects/my-first-project-card.md`.
+The script copies `vault/main/01-projects/_template/` into `vault/main/01-projects/my-first-project/` and creates `router/projects/my-first-project-card.md`.
 
 Then:
 
-1. Open `workspace/` in your AI tool. Claude Code reads `workspace/CLAUDE.md` automatically.
+1. Open the `vip/` folder in your AI tool. Claude Code reads the root `CLAUDE.md` automatically. `AGENTS.md` links to the same file.
 2. Open `vault/main/` as a vault in Obsidian.
 3. Fill in the project README and the card. Replace every remaining `{{PLACEHOLDER}}`.
 4. Start a session. Ask the agent for the project status. It should open only the card, then the project README.
@@ -69,9 +69,9 @@ vip/
 ├── scripts/
 │   └── new-project.sh            Creates a project from the template and its card
 │
-├── workspace/                    Layer 1: Direction and routing
+├── router/                    Layer 1: Direction and routing
 │   ├── CLAUDE.md                 Global router instructions (keep under 500 tokens)
-│   ├── README.md                 Guide to the workspace layer
+│   ├── README.md                 Guide to the router layer
 │   ├── _meta/                    Card schema and formatting rules
 │   ├── _templates/               Blank cards for new projects and clients
 │   ├── projects/                 One status card per project (under 300 tokens each)
@@ -97,14 +97,14 @@ Each top-level folder has its own README with more detail.
 
 ---
 
-## The "Single Source of Truth" rule
+## The "One Home Per Fact" rule
 
 Every fact lives in exactly one place. Duplicates drift apart, and the agent then reads conflicting information.
 
 | Data type | Single home | Never store here |
 | :--- | :--- | :--- |
-| Status and next step | `workspace/projects/` cards | Vault notes, graph files |
-| Purpose, architecture, and session logs | `vault/main/01-projects/<project>/` | Cards, workspace files |
+| Status and next step | `router/projects/` cards | Vault notes, graph files |
+| Purpose, architecture, and session logs | `vault/main/01-projects/<project>/` | Cards, router files |
 | Relationships between notes | `vault/graphify-out/graph.json` | Hand-written index notes |
 
 If a fact needs a second home, link to the first home instead of copying it.
@@ -113,8 +113,8 @@ If a fact needs a second home, link to the first home instead of copying it.
 
 ## Typical session flow
 
-1. The agent reads `workspace/CLAUDE.md`.
-2. It opens `workspace/projects/<project>-card.md` and reads the `next` field.
+1. The agent reads the root `CLAUDE.md`.
+2. It opens `router/projects/<project>-card.md` and reads the `next` field.
 3. It follows the card's `Vault folder` path and reads that folder's `README.md`.
 4. It reads the newest session log in that folder.
 5. If it needs related notes, it runs the graph walker against `graph.json`.
@@ -137,10 +137,10 @@ The script assumes a simple JSON layout (`nodes` with `id` and `label`, and `lin
 
 ## Adapting VIP to your work
 
-* Rename the numbered folders if your vault uses a different structure. Update the paths in `workspace/CLAUDE.md` to match.
+* Rename the numbered folders if your vault uses a different structure. Update the paths in the root `CLAUDE.md` to match.
 * Edit `vault/main/01-projects/_template/README.md` to change the sections every project gets.
 * Add a card for each project or client. Keep cards short.
-* Add standards to `workspace/references/` for anything the agent should follow every time.
+* Add standards to `router/references/` for anything the agent should follow every time.
 
 ---
 
@@ -148,9 +148,9 @@ The script assumes a simple JSON layout (`nodes` with `id` and `label`, and `lin
 
 VIP builds on these projects and ideas:
 
-* PARA method: [heyitsnoah/claudesidian](https://github.com/heyitsnoah/claudesidian)
-* ICM folder structure: [RinDig/Interpretable-Context-Methodology](https://github.com/RinDig/Interpretable-Context-Methodology/tree/main)
-* "One Home Per Fact" concept: Kenneth, [BrewedOps](https://brewedops.com/about/)
+* PARA setup: [heyitsnoah/claudesidian](https://github.com/heyitsnoah/claudesidian)
+* ICM structure: [RinDig/Interpretable-Context-Methodology](https://github.com/RinDig/Interpretable-Context-Methodology/tree/main)
+* One Home Per Fact concept: Kenneth, [BrewedOps](https://brewedops.com/about/)
 
 ---
 

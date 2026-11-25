@@ -13,7 +13,7 @@ summary: "{{ONE_LINE_SUMMARY}}"
 ## Read order
 
 1. This README: purpose, architecture, and links.
-2. The project card at `workspace/projects/{{PROJECT_SLUG}}-card.md`: the current next step.
+2. The project card at `router/projects/{{PROJECT_SLUG}}-card.md`: the current next step.
 3. The newest session log in this folder (highest date in the filename).
 4. Other files only when this README or a session log links to them.
 

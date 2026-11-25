@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Create a project folder from the template and a matching workspace card.
+# Create a project folder from the template and a matching router card.
 # Usage: scripts/new-project.sh <kebab-case-name>
 set -euo pipefail
 
@@ -13,7 +13,7 @@ fi
 root="$(cd "$(dirname "$0")/.." && pwd)"
 template_dir="$root/vault/main/01-projects/_template"
 dest="$root/vault/main/01-projects/$slug"
-card="$root/workspace/projects/$slug-card.md"
+card="$root/router/projects/$slug-card.md"
 today="$(date +%F)"
 name="$(echo "$slug" | tr '-' ' ' | awk '{for(i=1;i<=NF;i++)$i=toupper(substr($i,1,1)) substr($i,2)}1')"
 
@@ -35,7 +35,7 @@ find "$dest" -name '*.bak' -delete
 sed -e "s|{{PROJECT_SLUG}}|$slug|g" \
     -e "s|{{PROJECT_NAME}}|$name|g" \
     -e "s|{{YYYY-MM-DD}}|$today|g" \
-    "$root/workspace/_templates/project-card-template.md" > "$card"
+    "$root/router/_templates/project-card-template.md" > "$card"
 
 echo "Created:"
 echo "  $dest"

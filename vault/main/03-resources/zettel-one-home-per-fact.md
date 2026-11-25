@@ -11,7 +11,7 @@ summary: "Every fact has exactly one authoritative location."
 Duplicate facts drift apart. An AI agent that finds two versions of a status may act on the wrong one.
 
 Storage map:
-* Status and next step: workspace cards
+* Status and next step: router cards
 * Narrative and logs: vault project folders
 * Relationships: graph file
 

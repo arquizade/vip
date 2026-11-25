@@ -1,19 +1,28 @@
-# VIP Workspace Router
+# VIP Router
 
 You work inside a VIP (Vault-Index-Priority) repository. Follow these rules in every session.
 
 ## Execution rules
 
 1. Never run broad searches across `vault/main/`. Open only the files named by these rules.
-2. To learn project status, open `workspace/projects/<project>-card.md`. Read its `next` field and its Home table.
+2. To learn project status, open `router/projects/<project>-card.md`. Read its `next` field and its Home table.
 3. Follow the card's `Vault folder` path. Read that folder's `README.md` first. Then read the newest session log (highest date in the filename).
-4. Open `vault/graphify-out/graph.json` only when you need links between notes. Prefer `vault/main/.scripts/graph_walker.py` with the task keywords.
+4. For questions about related notes or cross-project topics, read the Graphify report first (see the Graphify section below). Query `graph.json` only for specific links.
 5. Keep each task to about 5 files. If you need more, state why before you read further.
-6. Read `workspace/references/` only when the task touches a topic that has a reference file.
+6. Read `router/references/` only when the task touches a topic that has a reference file.
+
+## Graphify knowledge graph
+
+Before searching or grepping raw notes, read `vault/graphify-out/GRAPH_REPORT.md` when the question relates to the vault. It lists the note clusters and the most connected notes.
+
+* Summary: `vault/graphify-out/GRAPH_REPORT.md`
+* Links: `vault/graphify-out/graph.json`, queried with `vault/main/.scripts/graph_walker.py <keywords> --hops 2`
+* Do not rebuild the graph. Graphify runs only when the user asks.
+* If the report is missing, say so, then use the card and project README instead.
 
 ## One Home Per Fact
 
-* Status and next step: `workspace/projects/` or `workspace/clients/`
+* Status and next step: `router/projects/` or `router/clients/`
 * Purpose, architecture, and decisions: the project `README.md` in `vault/main/01-projects/`
 * Session history: dated logs in the same project folder
 * Relationships: `vault/graphify-out/graph.json` (generated, never edited by hand)
@@ -39,4 +48,4 @@ If you find the same fact in two places, update the authoritative home and link 
 * Create new projects with `scripts/new-project.sh <name>`. Do not copy folders by hand.
 * Do not create a card for a project that has no `README.md` in its vault folder.
 * Do not edit files in `vault/graphify-out/`. Regenerate them with Graphify.
-* Keep this file under 500 tokens. Move long guidance to `workspace/references/`.
+* Keep this file under 500 tokens. Move long guidance to `router/references/`.

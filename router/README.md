@@ -1,4 +1,4 @@
-# Workspace (Layer 1: Direction and Routing)
+# Router (Layer 1: Direction and Routing)
 
 This folder is what you open in your AI tool. It holds the instructions and the status cards that route the agent to the right notes.
 
